@@ -1,0 +1,42 @@
+---
+title: "Non-Numeric Tests"
+output: 
+    pdf_document: default
+    geometry: margin=3in
+params:
+  r: NA
+  m: NA
+  pt: NA
+
+
+---
+
+**Date:** `r format(Sys.time(), "%d %B, %Y")`.
+<br/>
+\
+&nbsp;
+
+**Method**:  `r params$m`  
+
+\
+&nbsp;<br/>
+
+Result:
+\
+&nbsp;<br/>
+
+```{r,echo=FALSE} 
+params$r 
+options(digits=6)
+```
+\
+&nbsp;<br/>
+
+`r if(params$pt>=0.05){paste("The proportions of observations in different columns of the contingency table do not vary from row to row.The two characteristics that define the contingency table are not significantly related. (P = ",round(params$pt,4),")")}else{paste("The proportions of observations in different columns of the contingency table vary from row to row.The two characteristics that define the contingency table are significantly related. (P = ",round(params$pt,4),")")}`
+
+
+
+
+
+
+

@@ -1,0 +1,71 @@
+---
+title: "Compare Many Groups"
+output: 
+    pdf_document: default
+    geometry: margin=3in
+params:
+  m: NA
+  m1: NA
+  c: NA
+  p: NA
+  p1: NA
+  r: NA
+  pt: NA
+  rr: NA
+
+---
+
+**Date:** `r format(Sys.time(), "%d %B, %Y")`.
+<br/>
+\
+&nbsp;
+
+**Method**:  `r params$m`  
+
+**Data**: `r params$c`<br/>
+\
+&nbsp;
+
+**Normality Test** (`r params$m1`):  **P-value** = `r params$p`   (`r if(params$p>=0.05){"Paased"} else{"Failed"}`)<br/>
+
+**Equal Variance Test** (Levene's Test):  **P-value** = `r params$p1` (`r if(params$p1>=0.05){"Paased"} else{"Failed"}`)<br/>
+\
+&nbsp;<br/>
+
+Result:
+\
+&nbsp;<br/>
+`r options(digits=5)`
+`r if(params$m=="One Way ANOVA" && (params$p<0.05 || params$p1<0.05)){"Because of the Normality/Equal Variance Test P-value, Statitic Analysis is transfered to ANOVA on Ranks..."}`
+\
+&nbsp;<br/>
+```{r,echo=FALSE} 
+params$r 
+options(digits=6)
+```
+<br/>
+\
+&nbsp;
+\
+&nbsp;
+
+`r if(params$m=="One Way ANOVA" && params$p>=0.05 && params$p1>=0.05 && params$pt<0.05){paste("The differences in the mean values among the treatment groups are greater than would be expected by chance; there is a statistically significant difference (P = ",round(params$pt,4)," )","\n","\n","Multiple Comparisons versus Control Group","\n")} else if(params$m=="One Way ANOVA" && params$p>=0.05 && params$p1>=0.05 && params$pt>=0.05){paste("The differences in the mean values among the treatment groups are not greater than would be expected by chance; there is not a statistically significant difference (P = ",round(params$pt,4)," ).","\n","\n")}`
+
+<br/>
+
+
+`r if((params$p<0.05 || params$p1<0.05) && params$pt<0.05){paste("The differences in the median values among the treatment groups are greater than would be expected by chance; there is a statistically significant difference (P = ",round(params$pt,4)," )","\n","\n","Multiple Comparisons versus Control Group","\n")} else if((params$p<0.05 || params$p1<0.05) && params$pt>=0.05){paste("The differences in the median values among the treatment groups are not greater than would be expected by chance; there is not a statistically significant difference (P = ",round(params$pt,4)," )","\n","\n")}`
+
+<br/>
+\
+&nbsp;
+
+```{r,echo=FALSE}
+if(params$pt<0.05){
+  params$rr}
+options(digits=6)
+```
+
+
+
+

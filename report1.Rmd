@@ -1,0 +1,27 @@
+---
+title: "Normality Test"
+output: pdf_document
+params:
+  m: NA
+  n: NA
+  p: NA
+  c: NA
+---
+
+**Date:** `r format(Sys.time(), "%d %B, %Y")`
+<br/><br/>
+
+<br/><br/>
+**method**:  `r params$m`  
+<br/><br/>
+
+<br/><br/>
+**Data**: `r params$c`
+<br/><br/>
+
+<br/><br/>
+**P-value** = `r params$p`   `r params$n`
+
+*A test that fails indicates that the data varies significantly from the pattern expected if the data was drawn from a population with a normal distribution.
+A test that passes indicates that the data matches the pattern expected if the data was drawn from a population with a normal distribution.*
+
